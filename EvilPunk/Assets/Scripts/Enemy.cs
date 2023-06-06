@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform player;
+    public GameObject player;
     public float speed = 5f;
     public int maxHP = 100;
     public int damage;
@@ -11,13 +11,23 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         currentHP = maxHP;
+        FindPlayer();
+    }
+
+    private void FindPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogWarning("Player GameObject not found!");
+        }
     }
 
     private void Update()
     {
         if (player != null)
         {
-            Vector3 direction = player.position - transform.position;
+            Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
             direction.Normalize();
 
