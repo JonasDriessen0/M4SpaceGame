@@ -10,6 +10,8 @@ public class GunRotate : MonoBehaviour
     private Transform m_transform;
     private float angle;
     private bool isFlipped = false;
+    private float nextbullet;
+    private float nextBULLETtime = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,11 @@ public class GunRotate : MonoBehaviour
         {
             Shoot();
         }
+
+        if (nextbullet > 0)
+        {
+            nextbullet -= Time.deltaTime;
+        }
     }
 
     private void Update()
@@ -56,6 +63,12 @@ public class GunRotate : MonoBehaviour
 
     void Shoot()
     {
+        Debug.Log(nextbullet);
+        if(nextbullet >0)
+        {
+            return;
+        }
         Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(90, 0, angle));
+        nextbullet = nextBULLETtime;
     }
 }
