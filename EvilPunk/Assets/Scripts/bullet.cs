@@ -6,10 +6,10 @@ public class bullet : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody rb;
-    GunRotate gunRotate;
 
     void Start()
     {
         rb.velocity = transform.right * speed;
+        Destroy(gameObject, 10f);
     }
 }
