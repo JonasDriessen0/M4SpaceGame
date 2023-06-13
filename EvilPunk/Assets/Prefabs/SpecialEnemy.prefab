@@ -135,6 +135,7 @@ MonoBehaviour:
   speed: 4
   maxHP: 100
   damage: 40
+  damageEffectDuration: 0.1
 --- !u!54 &7213451114973779419
 Rigidbody:
   m_ObjectHideFlags: 0

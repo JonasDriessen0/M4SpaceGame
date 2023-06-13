@@ -116,22 +116,31 @@ public class WaveSpawner : MonoBehaviour
                 break;
         }
 
-        // Spawn the enemies based on the number of each type
+        // Create a list of enemy types
+        List<GameObject> enemyTypes = new List<GameObject>();
+
         for (int i = 0; i < numberOfBasicEnemies; i++)
         {
-            Instantiate(basicEnemyPrefab, GetRandomSpawner().position, Quaternion.Euler(40.828f, 0f, 0f));
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            enemyTypes.Add(basicEnemyPrefab);
         }
 
         for (int i = 0; i < numberOfSpecialEnemies; i++)
         {
-            Instantiate(specialEnemyPrefab, GetRandomSpawner().position, Quaternion.Euler(40.828f, 0f, 0f));
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            enemyTypes.Add(specialEnemyPrefab);
         }
 
         for (int i = 0; i < numberOfExplosiveEnemies; i++)
         {
-            Instantiate(explosiveEnemyPrefab, GetRandomSpawner().position, Quaternion.Euler(40.828f, 0f, 0f));
+            enemyTypes.Add(explosiveEnemyPrefab);
+        }
+
+        // Shuffle the list of enemy types
+        ShuffleList(enemyTypes);
+
+        // Spawn the enemies in random order
+        foreach (GameObject enemyPrefab in enemyTypes)
+        {
+            Instantiate(enemyPrefab, GetRandomSpawner().position, Quaternion.Euler(40.828f, 0f, 0f));
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
@@ -158,4 +167,18 @@ public class WaveSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, spawners.Length);
         return spawners[randomIndex];
     }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
 }
+
