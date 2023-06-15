@@ -11,7 +11,8 @@ public class GunRotate : MonoBehaviour
     private float angle;
     private bool isFlipped = false;
     private float nextbullet;
-    private float nextBULLETtime = 0.2f;
+
+    [SerializeField] private float nextBULLETtime = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,6 @@ public class GunRotate : MonoBehaviour
     {
         Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
         angle = Mathf.Atan2(Input.mousePosition.y - center.y, Input.mousePosition.x - center.x) * Mathf.Rad2Deg;
-        Debug.Log($"{angle} | {Input.mousePosition.x} | {Input.mousePosition.y}");
         transform.localEulerAngles = new Vector3(0, 0, angle);
         if (angle <= -90 || angle >= 90)
         {
@@ -31,7 +31,7 @@ public class GunRotate : MonoBehaviour
             if(!isFlipped)
             {
                 isFlipped = true;
-                //firePoint.transform.localPosition = new Vector3(firePoint.transform.localPosition.x, firePoint.transform.localPosition.y - firePointFlipRot, firePoint.transform.localPosition.z);
+                firePoint.transform.localPosition = new Vector3(firePoint.transform.localPosition.x, firePoint.transform.localPosition.y - firePointFlipRot, firePoint.transform.localPosition.z);
             }
             
         }
@@ -41,7 +41,7 @@ public class GunRotate : MonoBehaviour
             if (isFlipped)
             {
                 isFlipped = false;
-                //firePoint.transform.localPosition = new Vector3(firePoint.transform.localPosition.x, firePoint.transform.localPosition.y + firePointFlipRot, firePoint.transform.localPosition.z);
+                firePoint.transform.localPosition = new Vector3(firePoint.transform.localPosition.x, firePoint.transform.localPosition.y + firePointFlipRot, firePoint.transform.localPosition.z);
             }
         }
 
@@ -63,7 +63,6 @@ public class GunRotate : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log(nextbullet);
         if(nextbullet >0)
         {
             return;

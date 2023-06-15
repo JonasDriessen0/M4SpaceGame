@@ -78,9 +78,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        bullet bullet = other.GetComponent<bullet>(); // Access the bullet script on the collided object
+
+        if (bullet != null)
         {
-            currentHP -= damage;
+            currentHP -= bullet.damage;
             Destroy(other.gameObject);
 
             if (currentHP <= 0)
