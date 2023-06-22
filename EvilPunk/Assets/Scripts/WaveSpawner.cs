@@ -55,25 +55,26 @@ public class WaveSpawner : MonoBehaviour
         switch (currentWave)
         {
             case 1:
-                numberOfBasicEnemies = 5;
+                numberOfBasicEnemies = 10;
                 break;
             case 2:
-                numberOfBasicEnemies = 7;
+                numberOfBasicEnemies = 14;
                 break;
             case 3:
-                numberOfBasicEnemies = 6;
-                numberOfSpecialEnemies = 1;
-                break;
-            case 4:
-                numberOfBasicEnemies = 7;
+                numberOfBasicEnemies = 15;
                 numberOfSpecialEnemies = 2;
                 break;
+            case 4:
+                numberOfBasicEnemies = 19;
+                numberOfSpecialEnemies = 4;
+                break;
             case 5:
-                numberOfBasicEnemies = 1;
+                numberOfBasicEnemies = 19;
+                numberOfSpecialEnemies = 6;
                 break;
             case 6:
-                numberOfBasicEnemies = 10;
-                numberOfSpecialEnemies = 4;
+                numberOfBasicEnemies = 24;
+                numberOfSpecialEnemies = 8;
                 break;
             case 7:
                 numberOfBasicEnemies = 6;

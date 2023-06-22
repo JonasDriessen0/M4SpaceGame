@@ -6,15 +6,18 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - BasicBonkRadius
+  - BasicBonk
+  - AdvancedStab
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - EnemyLayer
+  - PlayerLayer
   - 
   - 
   - 

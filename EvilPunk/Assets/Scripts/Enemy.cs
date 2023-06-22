@@ -7,11 +7,13 @@ public class Enemy : MonoBehaviour
     public int maxHP = 100;
     public int damage;
     public float damageEffectDuration = 0.5f;
+    public float attackDistance = 5f; // Distance at which enemy activates attack animation
     private int currentHP;
     private bool isTakingDamage = false;
     private float damageEffectTimer;
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalColors;
+    private Animator animator;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class Enemy : MonoBehaviour
         {
             originalColors[i] = spriteRenderers[i].color;
         }
+
+        animator = GetComponentInChildren<Animator>(); // Access the Animator component from the child object
     }
 
     private void FindPlayer()
@@ -54,6 +58,13 @@ public class Enemy : MonoBehaviour
             {
                 transform.localScale = new Vector3(-1f, 1f, 1f); // Flip scale to face left
             }
+
+            // Calculate the distance between enemy and player
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+            // Set the "Attack" animation parameter based on distance
+            bool shouldAttack = distanceToPlayer <= attackDistance;
+            animator.SetBool("Attack", shouldAttack);
         }
 
         if (isTakingDamage)
@@ -78,7 +89,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bullet bullet = other.GetComponent<bullet>(); // Access the bullet script on the collided object
+        bullet bullet = other.GetComponent<bullet>(); // Access the Bullet script on the collided object
 
         if (bullet != null)
         {
