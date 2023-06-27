@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
     public float moveSpeed = 5f;     // Speed of movement
-    public int maxHP = 100;          // Maximum HP of the player
-    private int currentHP;           // Current HP of the player
+    public int maxHP = 150;          // Maximum HP of the player
+    public float currentHP;           // Current HP of the player
+    public float HPincrease;
 
     private Rigidbody rb;   // Reference to the Rigidbody component
     private PlayerAnimator playerAnimator;
+    public HealthBar healthBar;
 
     private void Start()
     {
@@ -19,6 +22,10 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (currentHP < maxHP)
+        {
+            currentHP += HPincrease * Time.deltaTime;
+        }
         // Movement input
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
@@ -38,18 +45,21 @@ public class PlayerScript : MonoBehaviour
             playerAnimator.SetMoving(isMoving);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("BasicBonk"))
         {
             // Reduce HP by 30
-            currentHP -= 30;
+            currentHP -= 18;
+ 
             Debug.Log(currentHP);
 
             // Check if HP drops below 0
             if (currentHP <= 0)
             {
                 currentHP = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
         if (other.CompareTag("AdvancedStab"))
@@ -62,6 +72,20 @@ public class PlayerScript : MonoBehaviour
             if (currentHP <= 0)
             {
                 currentHP = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
+        if (other.CompareTag("ExplosionRadius"))
+        {
+            // Reduce HP by 30
+            currentHP -= 90;
+            Debug.Log(currentHP);
+
+            // Check if HP drops below 0
+            if (currentHP <= 0)
+            {
+                currentHP = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
     }

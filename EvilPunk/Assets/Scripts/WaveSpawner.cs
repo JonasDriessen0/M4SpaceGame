@@ -18,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
 
     public Transform[] spawners;
     public int numberOfEnemiesPerWave = 5;
-    public float timeBetweenSpawns = 1f;
+    public float timeBetweenSpawns = 1.5f; // Increased time between spawns
 
     private int currentWave = 0;
 
@@ -45,7 +45,7 @@ public class WaveSpawner : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         currentWave++;
-        waveText.text = "Wave: " + currentWave;
+        waveText.text = "" + currentWave;
 
         int numberOfBasicEnemies = 0;
         int numberOfSpecialEnemies = 0;
@@ -73,47 +73,49 @@ public class WaveSpawner : MonoBehaviour
                 numberOfSpecialEnemies = 6;
                 break;
             case 6:
-                numberOfBasicEnemies = 24;
+                numberOfBasicEnemies = 22;
                 numberOfSpecialEnemies = 8;
                 break;
             case 7:
-                numberOfBasicEnemies = 6;
-                numberOfExplosiveEnemies = 1;
-                break;
-            case 8:
-                numberOfBasicEnemies = 12;
-                numberOfSpecialEnemies = 5;
-                break;
-            case 9:
-                numberOfBasicEnemies = 14;
-                numberOfSpecialEnemies = 5;
-                numberOfExplosiveEnemies = 1;
-                break;
-            case 10:
-                numberOfBasicEnemies = 1;
-                break;
-            case 11:
-                numberOfBasicEnemies = 15;
-                numberOfSpecialEnemies = 5;
-                numberOfExplosiveEnemies = 3;
-                break;
-            case 12:
-                numberOfBasicEnemies = 17;
-                numberOfSpecialEnemies = 5;
-                numberOfExplosiveEnemies = 4;
-                break;
-            case 13:
-                numberOfBasicEnemies = 20;
-                numberOfSpecialEnemies = 4;
-                numberOfExplosiveEnemies = 3;
-                break;
-            case 14:
-                numberOfBasicEnemies = 21;
-                numberOfSpecialEnemies = 6;
+                numberOfBasicEnemies = 24;
                 numberOfExplosiveEnemies = 2;
                 break;
+            case 8:
+                numberOfBasicEnemies = 28;
+                numberOfSpecialEnemies = 14;
+                break;
+            case 9:
+                numberOfBasicEnemies = 28;
+                numberOfSpecialEnemies = 8;
+                numberOfExplosiveEnemies = 5;
+                break;
+            case 10:
+                numberOfBasicEnemies = 38;
+                numberOfExplosiveEnemies = 10;
+                break;
+            case 11:
+                numberOfBasicEnemies = 32;
+                numberOfSpecialEnemies = 10;
+                numberOfExplosiveEnemies = 7;
+                break;
+            case 12:
+                numberOfBasicEnemies = 36;
+                numberOfSpecialEnemies = 10;
+                numberOfExplosiveEnemies = 8;
+                break;
+            case 13:
+                numberOfBasicEnemies = 40;
+                numberOfSpecialEnemies = 17;
+                numberOfExplosiveEnemies = 12;
+                break;
+            case 14:
+                numberOfSpecialEnemies = 30;
+                numberOfExplosiveEnemies = 20;
+                break;
             case 15:
-                numberOfBasicEnemies = 1;
+                numberOfBasicEnemies = 58;
+                numberOfSpecialEnemies = 27;
+                numberOfExplosiveEnemies = 30;
                 break;
         }
 
@@ -182,4 +184,3 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 }
-

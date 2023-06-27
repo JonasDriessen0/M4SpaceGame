@@ -134,5 +134,5 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8830497445614763373, guid: 4a01678c882484041bbec136a126c33d,
     type: 3}
   nextBULLETtime: 0.6
-  shotgunSpreadAngle: 13
+  shotgunSpreadAngle: 39
   numberOfBullets: 5
