@@ -20,6 +20,9 @@ public class WaveSpawner : MonoBehaviour
     public int numberOfEnemiesPerWave = 5;
     public float timeBetweenSpawns = 1.5f; // Increased time between spawns
 
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip waveTransitionSound; // Audio clip for wave transition
+
     private int currentWave = 0;
 
     private void Start()
@@ -38,14 +41,24 @@ public class WaveSpawner : MonoBehaviour
                 yield return null; // Wait for the next frame
             }
 
-            yield return new WaitForSeconds(5f); // Wait for next wave
+            PlayWaveTransitionSound(); // Play the wave transition sound
+
+            yield return new WaitForSeconds(5f); // Wait for the next wave
+        }
+    }
+
+    private void PlayWaveTransitionSound()
+    {
+        if (audioSource != null && waveTransitionSound != null)
+        {
+            audioSource.PlayOneShot(waveTransitionSound);
         }
     }
 
     private IEnumerator SpawnWave()
     {
         currentWave++;
-        waveText.text = "" + currentWave;
+        waveText.text = currentWave.ToString();
 
         int numberOfBasicEnemies = 0;
         int numberOfSpecialEnemies = 0;

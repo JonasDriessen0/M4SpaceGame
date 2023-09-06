@@ -7,6 +7,7 @@ public class ShotgunFire : MonoBehaviour
     public Transform firePoint;
     public float firePointFlipRot;
     public GameObject bulletPrefab;
+    public AudioSource audioSource;
     private Transform m_transform;
     private float angle;
     private bool isFlipped = false;
@@ -19,7 +20,10 @@ public class ShotgunFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_transform = this.transform;
+        m_transform = transform;
+
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +40,6 @@ public class ShotgunFire : MonoBehaviour
                 isFlipped = true;
                 firePoint.transform.localPosition = new Vector3(firePoint.transform.localPosition.x, firePoint.transform.localPosition.y - firePointFlipRot, firePoint.transform.localPosition.z);
             }
-
         }
         else
         {
@@ -70,6 +73,9 @@ public class ShotgunFire : MonoBehaviour
         {
             return;
         }
+
+        // Play the audio source
+        audioSource.Play();
 
         // Fire four bullets with a shotgun spread
         for (int i = 0; i < numberOfBullets; i++)

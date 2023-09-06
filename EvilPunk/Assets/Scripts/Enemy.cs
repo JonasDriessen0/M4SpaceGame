@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int damage;
     public float damageEffectDuration = 0.5f;
     public float attackDistance = 5f; // Distance at which enemy activates attack animation
+    public AudioSource hitAudioSource; // Reference to the AudioSource component
     private int currentHP;
     private bool isTakingDamage = false;
     private float damageEffectTimer;
@@ -44,7 +45,6 @@ public class Enemy : MonoBehaviour
         if (player != null)
         {
             Vector3 direction = player.transform.position - transform.position;
-            direction.y = 0f;
             direction.Normalize();
 
             transform.position += direction * speed * Time.deltaTime;
@@ -103,6 +103,12 @@ public class Enemy : MonoBehaviour
             else
             {
                 StartDamageEffect();
+            }
+
+            // Play the hit audio clip
+            if (hitAudioSource != null)
+            {
+                hitAudioSource.Play();
             }
         }
     }

@@ -50,10 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 4
-  maxHP: 100
+  maxHP: 140
   damage: 40
   damageEffectDuration: 0.1
-  attackDistance: 2
+  attackDistance: 4
+  hitAudioSource: {fileID: -7551326835578511150}
 --- !u!54 &3324827848061424552
 Rigidbody:
   m_ObjectHideFlags: 0

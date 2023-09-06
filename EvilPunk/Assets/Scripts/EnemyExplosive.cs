@@ -7,8 +7,8 @@ public class EnemyExplosive : MonoBehaviour
     public int maxHP = 100;
     public int damage;
     public float damageEffectDuration = 0.5f;
-    public float attackDistance = 5f; // Distance at which enemy activates attack animation
-    public float explosionDuration = 1f; // Duration for which ExplosionRadius is enabled during an attack
+    public float attackDistance = 7f;
+    public float explosionDuration = 1f;
 
     private int currentHP;
     private bool isTakingDamage = false;
@@ -17,6 +17,7 @@ public class EnemyExplosive : MonoBehaviour
     private Color[] originalColors;
     private Animator animator;
     private SphereCollider explosionRadius;
+    private bool isExplosionActive = false;
 
     private void Start()
     {
@@ -30,8 +31,8 @@ public class EnemyExplosive : MonoBehaviour
             originalColors[i] = spriteRenderers[i].color;
         }
 
-        animator = GetComponentInChildren<Animator>(); // Access the Animator component from the child object
-        explosionRadius = GetComponentInChildren<SphereCollider>(); // Access the SphereCollider component from the child object
+        animator = GetComponentInChildren<Animator>();
+        explosionRadius = GetComponentInChildren<SphereCollider>();
         explosionRadius.enabled = false;
     }
 
@@ -54,26 +55,27 @@ public class EnemyExplosive : MonoBehaviour
 
             transform.position += direction * speed * Time.deltaTime;
 
-            // Flip the entire hierarchy based on player position
             if (direction.x > 0f)
             {
-                transform.localScale = new Vector3(1f, 1f, 1f); // Reset scale to face right
+                transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else if (direction.x < 0f)
             {
-                transform.localScale = new Vector3(-1f, 1f, 1f); // Flip scale to face left
+                transform.localScale = new Vector3(-1f, 1f, 1f);
             }
 
-            // Calculate the distance between enemy and player
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-            // Set the "Attack" animation parameter based on distance
             bool shouldAttack = distanceToPlayer <= attackDistance;
             animator.SetBool("Attack", shouldAttack);
 
             if (shouldAttack)
             {
-                ActivateExplosionRadius();
+                if (!isExplosionActive)
+                {
+                    Invoke("ActivateExplosionRadius", 1f);
+                    isExplosionActive = true;
+                }
             }
         }
 
@@ -99,7 +101,7 @@ public class EnemyExplosive : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bullet bullet = other.GetComponent<bullet>(); // Access the Bullet script on the collided object
+        bullet bullet = other.GetComponent<bullet>();
 
         if (bullet != null)
         {
@@ -141,12 +143,13 @@ public class EnemyExplosive : MonoBehaviour
         {
             explosionRadius.enabled = true;
             Invoke("DisableExplosionRadius", explosionDuration);
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 1f);
         }
     }
 
     private void DisableExplosionRadius()
     {
         explosionRadius.enabled = false;
+        isExplosionActive = false;
     }
 }
