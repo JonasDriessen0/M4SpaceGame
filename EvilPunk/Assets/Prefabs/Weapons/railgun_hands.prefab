@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8858477640600926090}
   - component: {fileID: 2607976547561307603}
   - component: {fileID: -7321966035339809412}
+  - component: {fileID: 8063595093680339390}
   m_Layer: 0
   m_Name: railgun_hands
   m_TagString: Untagged
@@ -132,10 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 8743850992787154065}
   firePointFlipRot: 3
-  bulletPrefab: {fileID: 1553386914647692800, guid: 3aa3689460df2fa44a0f2014981fe158,
-    type: 3}
-  shootAudioSource: {fileID: -7321966035339809412}
-  nextBULLETtime: 2
+  angle: 0
 --- !u!82 &-7321966035339809412
 AudioSource:
   m_ObjectHideFlags: 0
@@ -232,3 +230,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8063595093680339390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858477640600926087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4e225d20e027d47801f5831270779b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 8743850992787154065}
+  bulletPrefab: {fileID: 1553386914647692800, guid: 3aa3689460df2fa44a0f2014981fe158,
+    type: 3}
+  shootAudioSource: {fileID: -7321966035339809412}
+  gunrotate: {fileID: 2607976547561307603}
+  nextBULLETtime: 0.2

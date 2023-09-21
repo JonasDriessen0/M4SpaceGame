@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3912041987640078167}
   - component: {fileID: 2855280662177063482}
   - component: {fileID: 3121610655850757727}
+  - component: {fileID: 4775519647797463994}
   m_Layer: 0
   m_Name: pistool_hands
   m_TagString: Untagged
@@ -132,10 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4415687077941171040}
   firePointFlipRot: 0
-  bulletPrefab: {fileID: 8830497445614763373, guid: 4a01678c882484041bbec136a126c33d,
-    type: 3}
-  shootAudioSource: {fileID: 3121610655850757727}
-  nextBULLETtime: 0.2
+  angle: 0
 --- !u!82 &3121610655850757727
 AudioSource:
   m_ObjectHideFlags: 0
@@ -232,3 +230,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4775519647797463994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516421282578634923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4e225d20e027d47801f5831270779b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 4415687077941171040}
+  bulletPrefab: {fileID: 8830497445614763373, guid: 4a01678c882484041bbec136a126c33d,
+    type: 3}
+  shootAudioSource: {fileID: 3121610655850757727}
+  gunrotate: {fileID: 2855280662177063482}
+  nextBULLETtime: 0.2
